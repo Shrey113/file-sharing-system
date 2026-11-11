@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>File Sharing System - Portal</title>
+    <link rel="icon" type="image/png" href="./data/app_png.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+
+            --bg-main: #f8fafc;
+            --bg-surface: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.08);
+            --card-border-hover: rgba(0, 0, 0, 0.18);
+            --card-glow: rgba(59, 130, 246, 0.08);
+
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+
+            --primary-accent: #2563eb;
+            --primary-gradient: linear-gradient(135deg, #2563eb, #4f46e5);
+            --primary-hover: linear-gradient(135deg, #1d4ed8, #4338ca);
+
+            --accent-coral: #ef4444;
+            --accent-coral-gradient: linear-gradient(135deg, #f43f5e, #ef4444);
+
+            --stat-bg: rgba(255, 255, 255, 0.85);
+            --stat-border: rgba(0, 0, 0, 0.07);
+
+            --radar-line: rgba(37, 99, 235, 0.35);
+            --radar-line-strong: rgba(37, 99, 235, 0.65);
+
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-family);
+        }
+
+        html,
+        body {
+            height: 100%;
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            -webkit-text-size-adjust: 100%;
+        }
+
+
+        .ambient-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 85%, rgba(239, 68, 68, 0.04) 0%, transparent 40%);
+        }
+
+
+        .portal-app-shell {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            max-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+
+
+
+        .hero-viewport {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 56px;
+            max-width: 1360px;
+            margin: 0 auto;
+            width: 100%;
+            min-height: 0;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            width: 100%;
+        }
+
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-size: 46px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.2px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+
+        .accent-underline {
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+            color: inherit;
+        }
+
+        .accent-underline::after {
+            content: '';
+            position: absolute;
+            left: -2%;
+            bottom: -5px;
+            width: 104%;
+            height: 8px;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M3 9C45 3 155 2 197 8' stroke='%23EF4444' stroke-width='4.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+        }
+
+        .hero-description {
+            font-size: 15.5px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 520px;
+        }
+
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 28px;
+            border-radius: 30px;
+            background: var(--accent-coral-gradient);
+            color: #ffffff !important;
+            font-size: 14.5px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.35);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 26px rgba(239, 68, 68, 0.45);
+        }
+
+        .cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 24px 11px 16px;
+            border-radius: 30px;
+            background: transparent;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--card-border);
+            transition: all 0.2s ease;
+        }
+
+        .github-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--stat-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .cta-secondary:hover {
+            background: var(--stat-bg);
+            border-color: var(--card-border-hover);
+            transform: translateY(-1px);
+        }
+
+        .cta-secondary:hover .github-circle {
+            transform: scale(1.1);
+            color: var(--primary-accent);
+        }
+
+
+
+
+
+
+        .hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .tech-radar-stage {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 440px;
+            height: 440px;
+            perspective: 1200px;
+            transform-style: preserve-3d;
+            overflow: visible;
+        }
+
+
+        .orbit-plane {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            transform-style: preserve-3d;
+        }
+
+        .plane-horizontal {
+            width: 360px;
+            height: 360px;
+            border: 1.5px solid var(--radar-line-strong);
+            transform: rotateX(68deg) rotateZ(0deg);
+            animation: spin-plane-h 24s linear infinite;
+        }
+
+        .plane-inclined {
+            width: 400px;
+            height: 400px;
+            border: 1.5px dashed var(--radar-line-strong);
+            transform: rotateY(65deg) rotateZ(0deg);
+            animation: spin-plane-v 30s linear infinite reverse;
+        }
+
+        @keyframes spin-plane-h {
+            100% {
+                transform: rotateX(70deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes spin-plane-v {
+            100% {
+                transform: rotateY(65deg) rotateZ(-360deg);
+            }
+        }
+
+        .satellite-dot {
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--primary-accent);
+            box-shadow: 0 0 8px var(--primary-accent);
+        }
+
+
+        .icon-3d-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: float-hero-stage 5.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes float-hero-stage {
+            0% {
+                transform: translateY(0) rotateX(0deg) rotateY(0deg);
+            }
+
+            50% {
+                transform: translateY(-10px) rotateX(2.5deg) rotateY(-2.5deg);
+            }
+
+            100% {
+                transform: translateY(-4px) rotateX(-2deg) rotateY(2deg);
+            }
+        }
+
+
+        .icon-link-stage {
+            display: block;
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .icon-shimmer-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .icon-shimmer-container:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-stage-logo {
+            position: relative;
+            z-index: 1;
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            filter: none !important;
+            box-shadow: none !important;
+            display: block;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+
+        .shimmer-glare {
+            position: absolute;
+            top: -40%;
+            left: -80%;
+            width: 50%;
+            height: 180%;
+            background: linear-gradient(110deg,
+                    transparent 15%,
+                    rgba(255, 255, 255, 0.35) 50%,
+                    transparent 85%);
+            transform: rotate(25deg);
+            pointer-events: none;
+            z-index: 2;
+            animation: glare-sweep 4.8s ease-in-out infinite;
+        }
+
+        @keyframes glare-sweep {
+
+            0%,
+            35% {
+                transform: translateX(-160%) rotate(25deg);
+            }
+
+            65%,
+            100% {
+                transform: translateX(380%) rotate(25deg);
+            }
+        }
+
+
+        .tech-chip {
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 24px;
+            background: var(--card-bg);
+            border: 1.5px solid var(--card-border-hover);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            z-index: 30;
+            pointer-events: none;
+            user-select: none;
+            overflow: visible;
+        }
+
+        .chip-top {
+            top: 25px;
+            left: 5px;
+            animation: float-chip-1 4.8s ease-in-out infinite alternate;
+        }
+
+        .chip-bottom {
+            bottom: 25px;
+            right: 5px;
+            animation: float-chip-2 5.2s ease-in-out infinite alternate 0.7s;
+        }
+
+        @keyframes float-chip-1 {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            100% {
+                transform: translateY(-8px) translateX(4px);
+            }
+        }
+
+        @keyframes float-chip-2 {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            100% {
+                transform: translateY(8px) translateX(-4px);
+            }
+        }
+
+        .chip-pulse-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+            animation: chip-blink 2s infinite ease-in-out;
+        }
+
+        @keyframes chip-blink {
+
+            0%,
+            100% {
+                opacity: 0.85;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.25);
+            }
+        }
+
+        .chip-icon-bolt {
+            color: #3b82f6;
+            font-size: 11px;
+        }
+
+
+
+
+        .portal-footer {
+            flex-shrink: 0;
+            height: 52px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: none;
+            background: transparent;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-simple {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .footer-heart {
+            color: #ef4444;
+            display: inline-block;
+            animation: heart-beat 1.8s infinite ease-in-out;
+        }
+
+        @keyframes heart-beat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.25);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.15);
+            }
+        }
+
+        .footer-github-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 8px;
+            background: var(--stat-bg);
+            border: 1px solid var(--stat-border);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 12.5px;
+            transition: all 0.2s ease;
+        }
+
+        .footer-github-badge:hover {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: var(--card-border-hover);
+            transform: translateY(-1px);
+            color: var(--primary-accent);
+        }
+
+
+        @media (max-height: 680px) or (max-width: 960px) {
+
+            html,
+            body {
+                overflow-y: auto;
+                height: auto;
+                max-height: none;
+            }
+
+            .portal-app-shell {
+                height: auto;
+                min-height: 100vh;
+                max-height: none;
+            }
+
+            .hero-viewport {
+                padding: 24px 20px;
+            }
+
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 36px;
+                padding: 24px 0;
+            }
+
+            .hero-left {
+                text-align: center;
+                align-items: center;
+            }
+
+            .hero-title {
+                font-size: 34px;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .tech-radar-stage {
+                width: 320px;
+                height: 320px;
+            }
+
+            .hero-stage-logo {
+                width: 180px;
+                height: 180px;
+            }
+
+            .plane-horizontal {
+                width: 260px;
+                height: 260px;
+            }
+
+            .plane-inclined {
+                width: 290px;
+                height: 290px;
+            }
+
+            .tech-chip {
+                padding: 6px 10px;
+                font-size: 10px;
+            }
+
+            .portal-footer {
+                height: auto;
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient-mesh"></div>
+
+    <div class="portal-app-shell">
+        <main class="hero-viewport">
+            <div class="hero-layout">
+                <section class="hero-left">
+                    <h1 class="hero-title">
+                        Fast Local Sharing <br>
+                        <span class="accent-underline">Tailored</span> for Your Network.
+                    </h1>
+
+                    <p class="hero-description">
+                        Direct, high-throughput peer transfers, shared folder explorer, and real-time clipboard sync
+                        between your devices. No size limits, no compression, zero cloud lag.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="/upload_file" class="cta-primary">
+                            <span>Explore Transfers</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                        <a href="https://github.com/shrey113" target="_blank" rel="noopener" class="cta-secondary"
+                            title="GitHub: shrey113">
+                            <span class="github-circle"><i class="fa-brands fa-github"></i></span>
+                            <span>shrey113</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="hero-right" id="hero-interactive-stage">
+                    <div class="tech-radar-stage">
+                        <div class="orbit-plane plane-horizontal">
+                            <span class="satellite-dot"></span>
+                        </div>
+                        <div class="orbit-plane plane-inclined">
+                            <span class="satellite-dot"></span>
+                        </div>
+
+                        <div class="tech-chip chip-top">
+                            <span class="chip-pulse-dot"></span>
+                            <span>LAN Discovery Active</span>
+                        </div>
+
+                        <div class="tech-chip chip-bottom">
+                            <i class="fa-solid fa-bolt chip-icon-bolt"></i>
+                            <span>Direct P2P Ready</span>
+                        </div>
+
+                        <div class="icon-3d-wrapper" id="icon-3d-wrapper">
+                            <a href="/upload_file" class="icon-link-stage" title="Click to Launch File Transfers">
+                                <div class="icon-shimmer-container">
+                                    <img src="./data/app_png.png" alt="File Sharing System Core"
+                                        class="hero-stage-logo">
+                                    <div class="shimmer-glare"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="portal-footer">
+            <div class="footer-simple">
+                <span>Made with</span>
+                <i class="fa-solid fa-heart footer-heart"></i>
+                <span>by</span>
+                <a href="https://github.com/shrey113" target="_blank" rel="noopener" class="footer-github-badge">
+                    <i class="fa-brands fa-github"></i>
+                    <span>shrey113</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const heroStage = document.getElementById('hero-interactive-stage');
+        const iconWrapper = document.getElementById('icon-3d-wrapper');
+        if (heroStage && iconWrapper) {
+            let targetRx = 0, targetRy = 0;
+            let currentRx = 0, currentRy = 0;
+            let isHovered = false;
+
+            window.addEventListener('mousemove', (e) => {
+                const rect = heroStage.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dx = (e.clientX - centerX) / (window.innerWidth / 2);
+                const dy = (e.clientY - centerY) / (window.innerHeight / 2);
+
+                targetRy = Math.max(-16, Math.min(16, dx * 16));
+                targetRx = Math.max(-16, Math.min(16, -dy * 16));
+                isHovered = true;
+            });
+
+            window.addEventListener('mouseleave', () => {
+                targetRx = 0;
+                targetRy = 0;
+                isHovered = false;
+            });
+
+            function renderParallax() {
+                if (isHovered) {
+                    currentRx += (targetRx - currentRx) * 0.08;
+                    currentRy += (targetRy - currentRy) * 0.08;
+                    iconWrapper.style.transform = `perspective(1000px) rotateX(${currentRx.toFixed(2)}deg) rotateY(${currentRy.toFixed(2)}deg)`;
+                }
+                requestAnimationFrame(renderParallax);
+            }
+            requestAnimationFrame(renderParallax);
+        }
+    </script>
+</body>
+
+</html>
