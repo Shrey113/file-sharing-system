@@ -1,101 +1,222 @@
 # File Sharing System
 
-Professional peer-to-peer file and data transfer software engineered for high-throughput, zero-cloud local area network exchange across Windows, macOS, Linux, Android, and web platforms.
+<p align="center">
+  <img src="./data/app_png.png" width="120" alt="File Sharing System">
+</p>
+
+<h2 align="center">File Sharing System</h2>
+
+<p align="center">
+  <strong>High-Speed Peer-to-Peer File Transfer</strong>
+</p>
+
+<p align="center">
+  Secure · Direct · Cloudless
+</p>
+
+<p align="center">
+  A unified file transfer and device communication platform, built for seamless data exchange across your local network.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Windows-Supported-0078D4?style=flat-square&logo=windows" alt="Windows">
+  <img src="https://img.shields.io/badge/macOS-Supported-888888?style=flat-square&logo=apple" alt="macOS">
+  <img src="https://img.shields.io/badge/Linux-Supported-FCC624?style=flat-square&logo=linux" alt="Linux">
+  <img src="https://img.shields.io/badge/Android-Supported-3DDC84?style=flat-square&logo=android" alt="Android">
+  <img src="https://img.shields.io/badge/Web-Accessible-4285F4?style=flat-square&logo=googlechrome" alt="Web">
+</p>
+
+
 
 ---
-
 ## Overview
 
-File Sharing System is a secure, decentralized local communication utility designed for high-speed file and clipboard synchronization without relying on external cloud infrastructure, internet connectivity, or remote intermediate relays. 
+**File Sharing System** is a cross-platform peer-to-peer communication and file transfer platform designed for high-speed data exchange across devices connected to the same local network.
 
-All communications occur strictly within the boundaries of the local area network (LAN) or direct wireless access point, ensuring enterprise-grade privacy, zero bandwidth metering, and transmission speeds bounded only by physical network hardware.
+The system enables users to transfer files, synchronize clipboard content, and exchange text and hyperlinks without depending on cloud storage services, external infrastructure, or internet-based transfer relays.
 
----
+Built around direct network communication, the platform takes advantage of available LAN and wireless connectivity to deliver efficient data transmission while keeping communication within the local network environment.
 
-## Key Capabilities
+Its architecture combines automatic device discovery, optimized socket-based communication, selective transfer approval, and browser-based access into a unified file-sharing experience.
 
-### High-Throughput Data Transmission
-Transfers raw files, documents, and media at maximum physical interface throughput over local Wi-Fi, Ethernet, and direct wireless connections utilizing optimized native multithreaded socket pipelines.
 
-### Automated Local Peer Discovery
-Discovers neighboring devices on the subnet automatically through industry-standard Zero-Configuration Networking (mDNS/DNS-SD). Devices broadcast their availability and identify peers without manual IP configuration.
+## APP preview
 
-### Batch Processing and Selective Approval
-Supports simultaneous dispatch of multiple files and structured payloads. Receiving parties are presented with an itemized verification prompt, permitting selective approval or refusal of individual items before writing to storage.
+| ![App List](./data/flutter_main.png) | ![Multiple Apps](Data/multiple_apps_running.png) |
+|:---:|:---:|
+| **Desktop interface** | **Mobile interface** |
 
-### Real-Time Text and Hyperlink Dispatch
-Enables instantaneous transmission of clipboard text, secure notes, and URLs across platforms with direct action triggers, including single-action clipboard copying and direct browser navigation.
+| ![Media Control](Data/media_control.png) | ![Controller 1](Data/controller_1.png) |
+|:---:|:---:|
+| **Media Center** | **Android Control** |
 
-### Zero-Installation Browser Client
-Includes an embedded HTTP server enabling any web-enabled platform without installed client software to participate in transfers via modern web browsers through direct local address access or optical matrix (QR) pairing.
+| ![Controller 2](Data/controller_2.png) | ![Controller 3](Data/controller_3.png) |
+|:---:|:---:|
+| **Audio Overlay** | **Media Preferences** |
 
-### Network Adapter Isolation
-Automatically detects and selects active physical network interfaces, isolating transmission from virtual machine bridges, container virtualization adapters, and tunneling interfaces to ensure reliable routing.
 
-### Background Resident Operation
-Features an unobtrusive system status interface and background execution mode, allowing long-running transfers to persist without active window focus.
+## Core Capabilities
 
----
+### High-Speed File Transfer
+Fast and reliable file sharing between connected devices with efficient transfer processing and support for large files.
 
-## Supported Platforms and Deliverables
+### Automatic Device Discovery
+Automatically discovers nearby compatible devices and establishes seamless connectivity without manual configuration.
 
-Pre-compiled production deliverables are provided for each supported operating system:
+### Selective Transfer Approval
+Maintains recipient control through individual file previews, allowing users to accept or reject incoming transfers.
 
-| Platform | Target Architecture | Distribution Format |
+### Clipboard and Content Sharing
+Instantly exchange text, clipboard content, and hyperlinks between connected devices.
+
+### Browser-Based Sharing
+Share files with devices through a responsive web interface without requiring additional application installation.
+
+### Intelligent Network Management
+Automatically identifies suitable network connections and optimizes device communication for reliable transfers.
+
+### Background Operation
+Keeps device communication and ongoing transfers active while minimizing interruptions to normal application usage.
+## Supported Platforms
+
+The application provides platform-specific distributions for the following operating systems.
+
+| Platform | Architecture | Distribution |
 |---|---|---|
-| **Windows** | x86_64 / x64 | Standalone Portable Executable (`.exe`) / ZIP |
-| **Android** | ARM64-v8a / armeabi-v7a / x86_64 | Android Package Kit (`.apk`) |
-| **macOS** | Universal Binary (Apple Silicon & Intel) | Signed Application Bundle (`.app` / `.zip`) |
-| **Linux** | x86_64 / x64 | Portable Standalone Binary (`.tar.gz`) |
-| **Web** | Cross-Platform (All Modern Browsers) | Embedded HTTP Portal (Port 9876) |
+| Windows | x86_64 | Portable `.exe` / ZIP |
+| Android | ARM64-v8a, armeabi-v7a, x86_64 | `.apk` |
+| macOS | Apple Silicon / Intel | `.app` / ZIP |
+| Linux | x86_64 | Standalone binary / `.tar.gz` |
+| Web | Modern browsers | Embedded HTTP interface |
 
----
+## Installation and Usage
 
-## Deployment and Usage
+### Desktop Installation
 
-### Desktop (Windows, macOS, Linux)
+Supported operating systems: Windows, macOS, and Linux.
 
-1. Download the designated release archive for your operating system.
-2. Extract the archive contents to your preferred system directory.
+1. Download the appropriate release package.
+2. Extract the archive if required.
 3. Launch the application executable.
-4. Ensure your firewall grants inbound and outbound UDP/TCP permissions on local subnet ranges for network discovery and file transport.
+4. Ensure the application is permitted to communicate through the system firewall.
+5. Connect the device to the same local network as the receiving device.
+6. Allow automatic discovery to identify available peers.
 
-### Android
+### Android Installation
 
-1. Download the application package (`.apk`) directly to the device.
-2. Grant permission for installation from your file manager when prompted.
-3. Open the application and grant the requested local network and storage permissions required for foreground background transfers.
+1. Download the Android APK from the releases section.
+2. Install the application on your device.
+3. Grant the requested permissions.
+4. Connect to the same local network as the other participating devices.
+5. Open the application and allow device discovery to complete.
 
-### Web Browser Client
+### Browser-Based Access
 
-1. Ensure the desktop or Android client application is actively running on the host device.
-2. Locate the displayed host address or scan the displayed optical pairing code.
-3. Navigate to the indicated local endpoint (`http://<HOST_IP>:9876`) within any standard web browser on the client device.
-4. Upload files or send text directly through the responsive web interface.
+The browser client enables file sharing without installing the native application on the receiving device.
+
+1. Start the File Sharing System application on the host device.
+2. Ensure the embedded HTTP server is running.
+3. Obtain the host device's local IP address.
+4. Open a browser on another device connected to the same network.
+5. Navigate to the following address:
+
+   `http://<HOST_IP>:9876`
+
+6. Use the web interface to exchange supported files and content.
+
+Alternatively, scan the QR code displayed by the host application when available.
 
 ---
 
-## Security and Data Privacy Architecture
+## Network Architecture
 
-- **Subnet Confinement**: All transmissions remain entirely within the local broadcast domain. No telemetries, analytics, or payload packets are transmitted to external servers.
-- **Physical Interface Pinning**: Socket operations bind directly to physical network adapters, preventing accidental transmission through virtual adapters or VPN tunnels.
-- **Mandatory Consent Protocol**: Incoming transfers require explicit recipient confirmation prior to initiating filesystem write operations.
+The platform is designed around direct local communication rather than cloud-mediated file transfer.
+
+### Communication Model
+
+- **Discovery:** mDNS/DNS-SD-based local peer discovery.
+- **Transport:** Direct TCP/UDP communication where supported by the relevant service.
+- **Web Access:** Embedded HTTP server.
+- **Device Connectivity:** Local area network and direct wireless connectivity.
+- **Transfer Management:** Recipient-controlled incoming transfer approval.
+
+### Network Requirements
+
+For reliable operation:
+
+- Participating devices should be reachable over the same local network or an appropriately configured wireless access point.
+- Firewall rules must permit the application's required communication ports.
+- Network isolation and client isolation features should be disabled where they prevent peer-to-peer communication.
+- Available bandwidth and network hardware determine achievable transfer performance.
 
 ---
 
-## Proprietary License Agreement
+## Security and Privacy
 
-Copyright (c) 2026. All rights reserved.
+Privacy and local network communication are central design considerations.
 
-This software and associated binary distributions are proprietary and confidential.
+### Local Network Communication
+
+File transfers are designed to operate directly between participating devices without requiring an external cloud transfer service.
+
+### Network Interface Selection
+
+Communication interfaces are selected to avoid unintended routing through unsupported virtual or tunneling adapters.
+
+### Recipient Authorization
+
+Incoming file requests are presented for recipient verification before accepted files are written to local storage.
+
+### Reduced External Dependencies
+
+The core transfer architecture does not depend on remote file-hosting infrastructure or external transfer relays.
+
+---
+
+## Project Distribution
+
+Official application builds and platform-specific releases are distributed through the project's release channel.
+
+**Release packages:** Windows, Android, macOS and Linux.
+
+**Web client:** Provided through the embedded HTTP service.
+
+For installation instructions, compatibility information, and release updates, refer to the project's official distribution channel.
+
+---
+
+## License and Usage Restrictions
+
+**Copyright © 2026. All Rights Reserved.**
+
+File Sharing System and its associated software distributions are proprietary and confidential.
 
 ### Permitted Use
-Permission is granted to download, install, and execute the pre-compiled binary releases (.exe, .apk, and related system packages) solely for personal or internal organizational use.
 
-### Prohibited Activities
-1. **No Source Code Access**: Source code is proprietary, confidential, and not licensed under this agreement.
-2. **No Reverse Engineering**: Decompilation, disassembly, reverse engineering, decryption, or extraction of underlying source code, protocols, or architecture is strictly prohibited.
-3. **No Modification or Derivative Works**: Modification, adaptation, translation, patching, or creation of derivative works based on this software is strictly prohibited.
-4. **No Redistribution or Reselling**: Redistribution, sublicensing, leasing, renting, hosting as a paid commercial service, or commercial resale of the software binaries without express written authorization is strictly prohibited.
+Users are permitted to download, install, and execute officially distributed precompiled application packages for personal or internal organizational use, subject to the terms of this agreement.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+### Restrictions
+
+Without prior written authorization from the copyright holder, users may not:
+
+1. **Source Code Extraction:** Access, extract, or attempt to obtain the proprietary source code.
+2. **Reverse Engineering:** Decompile, disassemble, decrypt, or reverse engineer the software or its underlying implementation.
+3. **Modification:** Modify, patch, adapt, or create derivative works from the software.
+4. **Redistribution:** Redistribute, sublicense, lease, rent, or commercially resell the software or its distributions.
+5. **Unauthorized Commercial Use:** Offer the software as a paid hosted service or otherwise commercially exploit its functionality without authorization.
+
+### Disclaimer of Warranty
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM THE SOFTWARE, ITS DISTRIBUTION, OR ITS USE.
+
+---
+
+<p align="center">
+  <strong>File Sharing System</strong>
+  <br>
+  Direct Device Communication. Without Cloud Dependency.
+  <br><br>
+  © 2026 All Rights Reserved.
+</p>
