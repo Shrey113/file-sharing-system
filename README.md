@@ -37,22 +37,56 @@ The system enables users to transfer files, synchronize clipboard content, and e
 
 Built around direct network communication, the platform takes advantage of available LAN and wireless connectivity to deliver efficient data transmission while keeping communication within the local network environment.
 
-Its architecture combines automatic device discovery, optimized socket-based communication, selective transfer approval, and browser-based access into a unified file-sharing experience.
+
+
+<h2 align="center">DOWNLOAD</h2>
+
+<div align="center">
+
+<table width="100%">
+  <tr>
+    <td width="35%"><strong>Windows</strong></td>
+    <td align="right">
+      <a href="https://github.com/Shrey113/file-sharing-system/releases/latest/download/FileSharingSystem_Windows.zip">Download</a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Linux</strong></td>
+    <td align="right">
+      <a href="https://github.com/Shrey113/file-sharing-system/releases/latest/download/FileSharingSystem_Linux.zip">Download</a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>macOS</strong></td>
+    <td align="right">
+      <a href="https://github.com/Shrey113/file-sharing-system/releases/latest/download/FileSharingSystem_macOS.zip">Download</a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>Android</strong></td>
+    <td align="right">
+      <a href="https://github.com/Shrey113/file-sharing-system/releases/latest/download/FileSharingSystem_Android.apk">Download</a>
+    </td>
+  </tr>
+</table>
+
+</div>
+
 
 
 ## APP preview
 
-| ![App List](./data/flutter_main.png) | ![Multiple Apps](Data/multiple_apps_running.png) |
+| ![App List](./data/flutter_main.png) | ![Multiple Apps](./data/Folder_sharing.png) |
 |:---:|:---:|
-| **Desktop interface** | **Mobile interface** |
+| **Desktop Main interface** | **Folder sharing interface** |
 
-| ![Media Control](Data/media_control.png) | ![Controller 1](Data/controller_1.png) |
+| ![Media Control](./data/android_img_1.png) | ![Controller 1](./data/android_img_2.png) |
 |:---:|:---:|
-| **Media Center** | **Android Control** |
+| **Android Home page** | **Android view** |
 
-| ![Controller 2](Data/controller_2.png) | ![Controller 3](Data/controller_3.png) |
+| ![Controller 2](./data/web_1.png) | ![Controller 3](./data/web_1.png) |
 |:---:|:---:|
-| **Audio Overlay** | **Media Preferences** |
+| **Web 1** | **Web 2** |
 
 
 ## Core Capabilities
