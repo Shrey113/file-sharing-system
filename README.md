@@ -43,7 +43,7 @@ Built around direct network communication, the platform takes advantage of avail
 
 <div align="center">
 
-<table width="100%">
+<table>
   <tr>
     <td width="35%"><strong>Windows</strong></td>
     <td align="right">
